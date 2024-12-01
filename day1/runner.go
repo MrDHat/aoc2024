@@ -1,16 +1,15 @@
-package p1distance
+package day1
 
 import (
 	"bufio"
 	"fmt"
 	"log"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
 
-func Run(path string) {
+func ReadListsFromFile(path string) ([]int, []int) {
 	list1 := []int{}
 	list2 := []int{}
 
@@ -42,29 +41,15 @@ func Run(path string) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(Distance(list1, list2))
+	return list1, list2
 }
 
-func Distance(locationList1 []int, locationList2 []int) int {
+func RunPart1(inputPath string) {
+	list1, list2 := ReadListsFromFile(inputPath)
+	fmt.Println(CalculateDistance(list1, list2))
+}
 
-	// sort the lists
-	sort.Slice(locationList1, func(i, j int) bool {
-		return locationList1[i] < locationList1[j]
-	})
-	sort.Slice(locationList2, func(i, j int) bool {
-		return locationList2[i] < locationList2[j]
-	})
-
-	distance := 0
-	for i := range locationList1 {
-		dist := locationList1[i] - locationList2[i]
-		if dist < 0 {
-			distance += -dist
-		} else {
-			distance += dist
-		}
-	}
-
-	return distance
-
+func RunPart2(inputPath string) {
+	list1, list2 := ReadListsFromFile(inputPath)
+	fmt.Println(CalculateSimilarityScore(list1, list2))
 }
