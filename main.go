@@ -16,5 +16,7 @@ func main() {
 		day1.RunPart2("./inputs/locationLists.txt")
 	case "d2p1":
 		day2.RunPart1("./inputs/reactorReports.txt")
+	case "d2p2":
+		day2.RunPart2("./inputs/reactorReports.txt")
 	}
 }

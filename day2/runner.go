@@ -44,10 +44,10 @@ func ReadReportsFromFile(path string) [][]int {
 
 func RunPart1(inputPath string) {
 	reports := ReadReportsFromFile(inputPath)
-	fmt.Println(NoOfSafeReports(reports))
+	fmt.Println(NoOfSafeReports(reports, false))
 }
 
-// func RunPart2(inputPath string) {
-// 	list1, list2 := ReadListsFromFile(inputPath)
-// 	fmt.Println(CalculateSimilarityScore(list1, list2))
-// }
+func RunPart2(inputPath string) {
+	reports := ReadReportsFromFile(inputPath)
+	fmt.Println(NoOfSafeReports(reports, true))
+}
