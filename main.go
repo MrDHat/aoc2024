@@ -2,6 +2,7 @@ package main
 
 import (
 	"aoc2024/day1"
+	"aoc2024/day2"
 	"os"
 )
 
@@ -13,5 +14,7 @@ func main() {
 		day1.RunPart1("./inputs/locationLists.txt")
 	case "d1p2":
 		day1.RunPart2("./inputs/locationLists.txt")
+	case "d2p1":
+		day2.RunPart1("./inputs/reactorReports.txt")
 	}
 }
