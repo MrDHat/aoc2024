@@ -9,8 +9,28 @@ import (
 )
 
 func FindUncorruptedData(input string) []string {
-	regex := regexp.MustCompile(`mul\(\d+(\.\d+)?,\d+(\.\d+)?\)`)
-	return regex.FindAllString(input, -1)
+	return regexp.MustCompile(`mul\(\d+(\.\d+)?,\d+(\.\d+)?\)`).FindAllString(input, -1)
+}
+
+func FindUncorruptedDataWithPast(input string, isLastOneAMatch bool) ([]string, bool) {
+	regex := regexp.MustCompile(`do\(\)|don't\(\)|mul\(\d+(\.\d+)?,\d+(\.\d+)?\)`)
+	resp := []string{}
+
+	matches := regex.FindAllString(input, -1)
+	isAMatch := isLastOneAMatch
+	for _, m := range matches {
+		if m == "do()" {
+			isAMatch = true
+		} else if m == "don't()" {
+			isAMatch = false
+		} else {
+			if isAMatch {
+				resp = append(resp, m)
+			}
+		}
+	}
+
+	return resp, isAMatch
 }
 
 func Multiply(str string) int {
@@ -30,8 +50,19 @@ func Multiply(str string) int {
 	return firstNumber * secondNumber
 }
 
-func Calculate(input string) {
-	cleanData := FindUncorruptedData(input)
+func Calculate(input string, supportPast bool) {
+	cleanData := []string{}
+	lines := strings.Split(input, "\n")
+	isLastOneAMatch := true
+	for _, line := range lines {
+		if supportPast {
+			var data []string
+			data, isLastOneAMatch = FindUncorruptedDataWithPast(line, isLastOneAMatch)
+			cleanData = append(cleanData, data...)
+		} else {
+			cleanData = append(cleanData, FindUncorruptedData(line)...)
+		}
+	}
 
 	sum := 0
 

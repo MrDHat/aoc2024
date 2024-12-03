@@ -23,5 +23,7 @@ func main() {
 
 	case "d3p1":
 		day3.RunPart1("./inputs/mullItOver.txt")
+	case "d3p2":
+		day3.RunPart2("./inputs/mullItOver.txt")
 	}
 }

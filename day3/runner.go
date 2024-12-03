@@ -16,5 +16,10 @@ func ReadDatFromFile(path string) string {
 
 func RunPart1(path string) {
 	input := ReadDatFromFile(path)
-	Calculate(input)
+	Calculate(input, false)
+}
+
+func RunPart2(path string) {
+	input := ReadDatFromFile(path)
+	Calculate(input, true)
 }
